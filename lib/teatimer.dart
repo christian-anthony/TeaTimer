@@ -10,37 +10,7 @@ class TeaTimer extends StatefulWidget {
 
 class _TeaTimerState extends State<TeaTimer>{
   
-  Stopwatch _stopwatch = Stopwatch();
-
-@override
-void didUpdateWidget(TeaTimer oldWidget) {
-  if (_stopwatch.isRunning){
-    setState(() {print('butt');});
-    }
-  }
-
-  void startTimer(){
-    setState(() {
-      _stopwatch.start();
-    });
-  }
-
-  bool isRunning(){
-    return _stopwatch.isRunning;
-  }
-
-@override
-  void initState() {
-    super.initState();
-    if (_stopwatch.isRunning){
-      setState(() {});
-    }
-  }
   
-
-  // String toString(){
-  //   return _stopwatch.elapsed.toString();
-  // }
 
 
   @override
@@ -48,11 +18,12 @@ void didUpdateWidget(TeaTimer oldWidget) {
     return Column(
       children: [
         Center(
-          child:Text(
-            _stopwatch.elapsed.toString()
-            )
+          child:Text("00:00")
           ),
-        FloatingActionButton(onPressed: () => startTimer())
+        ElevatedButton(
+          child: Text("Start"),
+          onPressed: () => {print("Button has been pressed!")},
+        )
       ],
     );
   }
