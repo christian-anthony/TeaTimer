@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'teatimer.dart';
-
+import 'testwidget.dart';
 void main() {
   runApp(MyApp());
 }
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Container(
-        child: TeaTimer(),
+        child: TestWidget(),
       )
     );
   }

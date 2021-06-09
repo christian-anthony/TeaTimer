@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 
 class TeaTimer extends StatefulWidget {
+
+  final Stopwatch stopwatch = Stopwatch();
+
   @override 
   _TeaTimerState createState() => _TeaTimerState();
 }
@@ -11,6 +14,7 @@ class TeaTimer extends StatefulWidget {
 class _TeaTimerState extends State<TeaTimer>{
   
   
+  Duration _currentCount = Duration();
 
 
   @override
@@ -18,13 +22,22 @@ class _TeaTimerState extends State<TeaTimer>{
     return Column(
       children: [
         Center(
-          child:Text("00:00")
+          child: currentCount(context),
           ),
         ElevatedButton(
           child: Text("Start"),
-          onPressed: () => {print("Button has been pressed!")},
+          onPressed: () => {},
         )
       ],
     );
   }
+
+
+  Widget currentCount(BuildContext context) {
+
+    setState(() {});
+    return Text(_currentCount.inDays.toString());
+  }
 }
+
+ 
