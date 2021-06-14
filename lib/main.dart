@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
         scaffoldBackgroundColor: Colors.grey[800]
       ),
-      home: MyHomePage(title: 'Gongfu Tea Timer'),
+      home: MyHomePage(title: 'Tea Timer'),
     );
   }
 }

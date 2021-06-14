@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+
 class TeaTimer extends StatefulWidget {
   @override 
   _TeaTimerState createState() => _TeaTimerState();
@@ -19,23 +20,58 @@ class _TeaTimerState extends State<TeaTimer>{
           child: timerText(context),
           ),
         ElevatedButton(
-          child: Text("Start"),
+          child: Text("Start: 10 sec"),
           onPressed: () => onButtonPress(), 
         ),
       ],
     );
   }
 
-  //Displays the formatted text for the timer duration
-  Widget timerText(BuildContext context){
-    return Text("${_currentDuration.inMinutes}".padLeft(2,"0") + ":" + "${_currentDuration.inSeconds % Duration.secondsPerMinute}".padLeft(2,"0"));
-  }
+
+
+
+
+
 
   //Creates a new periodic timer
   void startTimer()
   {
-    _timer = Timer.periodic(Duration(seconds: 1), (_timer) { incrementSeconds(); });
+
+    
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //Displays the formatted text for the timer duration
+  Widget timerText(BuildContext context){
+    return Text("${_currentDuration.inMinutes}".padLeft(2,"0") + ":" + "${_currentDuration.inSeconds % Duration.secondsPerMinute}".padLeft(2,"0"),
+    style: TextStyle(
+      fontSize: 40,
+    ),);
+  }
+
+
 
   //Stops the timer currently running
   void stopTimer()
@@ -54,7 +90,22 @@ class _TeaTimerState extends State<TeaTimer>{
   //Decrements the time display
   void decrementSeconds()
   {
-    _currentDuration -= Duration(seconds: 1);
+    if (_timer?.tick == _currentDuration.inSeconds)
+    {
+      soundAlarm();
+      stopTimer();
+    }
+    else
+    {
+      setState(() 
+      {
+        _currentDuration -= Duration(seconds: 1); 
+      });
+    }
+  }
+
+  void soundAlarm(){
+
   }
 
   //Clears any currently running timers and creates new timer
@@ -71,6 +122,16 @@ class _TeaTimerState extends State<TeaTimer>{
       });
     }
   }
+
+
+
+
+
+
+
+
+
+
 }
 
  
