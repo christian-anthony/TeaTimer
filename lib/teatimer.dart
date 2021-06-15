@@ -14,16 +14,18 @@ class _TeaTimerState extends State<TeaTimer>{
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: timerText(context),
+    return Container(
+      alignment: Alignment.center,
+      //color: Colors.red,
+      child: Column(
+        children: [
+          timerText(context),
+          ElevatedButton(
+            child: Text("Start: 10 sec"),
+            onPressed: () => onButtonPress(), 
           ),
-        ElevatedButton(
-          child: Text("Start: 10 sec"),
-          onPressed: () => onButtonPress(), 
-        ),
-      ],
+        ],
+      )
     );
   }
 
@@ -87,12 +89,13 @@ class _TeaTimerState extends State<TeaTimer>{
   Widget timerText(BuildContext context){
     return Text("${_currentDuration.inMinutes}".padLeft(2,"0") + ":" + "${_currentDuration.inSeconds % Duration.secondsPerMinute}".padLeft(2,"0"),
     style: TextStyle(
-      fontSize: 40,
+      fontSize: 80,
     ),);
   }
 
   //Called on timer completion, plays sound
   void soundAlarm(){}
-}
+
+} //End of TeaTimer
 
  
