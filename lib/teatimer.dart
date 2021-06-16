@@ -11,6 +11,7 @@ class _TeaTimerState extends State<TeaTimer>{
   Timer? _timer;
   Duration _currentDuration = Duration();
   bool isRunning = false;
+  double _sliderValueInSeconds = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +20,12 @@ class _TeaTimerState extends State<TeaTimer>{
       //color: Colors.red,
       child: Column(
         children: [
-          timerText(context),
+          timerText(context, _currentDuration),
           ElevatedButton(
             child: Text("Start: 10 sec"),
             onPressed: () => onButtonPress(), 
           ),
+          teaTimerSlider(context),
         ],
       )
     );
@@ -86,11 +88,38 @@ class _TeaTimerState extends State<TeaTimer>{
   }
 
   //Displays the formatted text for the timer duration
-  Widget timerText(BuildContext context){
-    return Text("${_currentDuration.inMinutes}".padLeft(2,"0") + ":" + "${_currentDuration.inSeconds % Duration.secondsPerMinute}".padLeft(2,"0"),
+  Widget timerText(BuildContext context, Duration timeValue){
+    return Text(timerTextString(timeValue),
     style: TextStyle(
       fontSize: 80,
     ),);
+  }
+
+  //Outputs string from duration with 00:00 format
+  String timerTextString(Duration timeValue){
+    return "${timeValue.inMinutes}".padLeft(2,"0") + ":" + "${timeValue.inSeconds % Duration.secondsPerMinute}".padLeft(2,"0");
+  }
+
+  //Outputs string from duration with 00 min 00 sec format
+  String timerTextStringWritten(Duration timeValue){
+    return "${timeValue.inMinutes} min" + " " + "${timeValue.inSeconds % Duration.secondsPerMinute} sec";
+  }
+
+  //Slider widget for choosing timer duration
+  Widget teaTimerSlider(BuildContext context)
+  {
+    return Slider(
+      value: _sliderValueInSeconds, 
+      onChanged: (double value){
+        setState(() {
+          _sliderValueInSeconds = value;
+        });
+      },
+      min: 0,
+      max: 300,
+      label: timerTextStringWritten(Duration(seconds:_sliderValueInSeconds.toInt())),
+      divisions: 300,
+      );
   }
 
   //Called on timer completion, plays sound
