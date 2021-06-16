@@ -22,7 +22,7 @@ class _TeaTimerState extends State<TeaTimer>{
         children: [
           timerText(context, _currentDuration),
           ElevatedButton(
-            child: Text("Start: 10 sec"),
+            child: Text("Start"),
             onPressed: () => onButtonPress(), 
           ),
           teaTimerSlider(context),
@@ -38,7 +38,7 @@ class _TeaTimerState extends State<TeaTimer>{
     if (_timer != null){
       _timer?.cancel();
     }
-
+    _currentDuration = Duration(seconds: _sliderValueInSeconds.toInt());   //This is a temp hardcoded value for testing
     _timer = Timer.periodic(Duration(seconds: 1), (timer) { onTick(); });
     isRunning = true;
   }
@@ -81,7 +81,6 @@ class _TeaTimerState extends State<TeaTimer>{
     }
     else{
       setState(() {
-        _currentDuration = Duration(seconds: 10);   //This is a temp hardcoded value for testing
         startTimer();
       });
     }
