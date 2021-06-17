@@ -19,6 +19,7 @@ class _TeaTimerState extends State<TeaTimer>{
       alignment: Alignment.center,
       //color: Colors.red,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           timerText(context, _currentDuration),
           ElevatedButton(

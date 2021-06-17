@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'teatimer.dart';
-import 'testwidget.dart';
+import 'dart:developer';
+
 void main() {
   runApp(MyApp());
 }
@@ -38,10 +39,29 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-      ),
-      body: SafeArea(
-        child: TeaTimer(),
-      ),
+        ),
+      body: teaPotButton(context),
     );
   }
+}
+
+
+
+
+Widget teaPotButton(BuildContext context)
+{
+  return ElevatedButton(
+    style: ButtonStyle(),
+    onPressed: (){ print("boobs"); }, 
+    child: Text("Lorem Ipsum"),
+  );
+}
+
+
+
+Widget teaPotImage(BuildContext context)
+{
+return Image(image: AssetImage('assets/teapot1.png'),
+    height: 200,
+  );
 }
