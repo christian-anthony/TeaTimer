@@ -40,7 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         ),
-      body: teaPotButton(context),
+      body: Center(
+        child: teaPotImage(context),
+      ),
     );
   }
 }
@@ -62,6 +64,6 @@ Widget teaPotButton(BuildContext context)
 Widget teaPotImage(BuildContext context)
 {
 return Image(image: AssetImage('assets/teapot1.png'),
-    height: 200,
+    height: 250,
   );
 }
