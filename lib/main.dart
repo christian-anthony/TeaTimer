@@ -40,7 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SafeArea(
-        child: TeaTimer(),
+        child: Container(
+          alignment: Alignment.center,
+          child: TeaTimer(),
+        )
       ),
     );
   }
