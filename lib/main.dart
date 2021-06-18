@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'teatimer.dart';
-import 'dart:developer';
 
 void main() {
   runApp(MyApp());
@@ -41,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         ),
       body: Center(
-        child: teaPotImage(context),
+        child: teaPotButton(context),
       ),
     );
   }
@@ -52,12 +51,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
 Widget teaPotButton(BuildContext context)
 {
-  return ElevatedButton(
-    style: ButtonStyle(),
-    onPressed: (){ print("boobs"); }, 
-    child: Text("Lorem Ipsum"),
+  return Container(
+    child: ElevatedButton.icon(
+    icon: teaPotImage(context), 
+    label: Text("Teapot"),
+    //style: ButtonStyle(),
+    onPressed: (){ print("This button works"); }, 
+    )
   );
 }
+
+
+
+
+class teaPotPainter extends CustomPainter{
+  @override
+  void paint(Canvas canvas, Size size) {
+    // TODO: implement paint
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    // TODO: implement shouldRepaint
+    throw UnimplementedError();
+  }
+
+
+
+  
+}
+
+
+
+
 
 
 
