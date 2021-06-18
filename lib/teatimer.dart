@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+
+//apparently my contributions dont count if they arent on the master so im adding this comment.
 class TeaTimer extends StatefulWidget {
   @override 
   _TeaTimerState createState() => _TeaTimerState();
