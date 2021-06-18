@@ -47,44 +47,21 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 
-
-
 Widget teaPotButton(BuildContext context)
 {
   return Container(
     child: ElevatedButton.icon(
-    icon: teaPotImage(context), 
+    icon: CustomPaint(
+      painter: CustomPainter(
+
+      ),
+    ), 
     label: Text("Teapot"),
     //style: ButtonStyle(),
     onPressed: (){ print("This button works"); }, 
     )
   );
 }
-
-
-
-
-class teaPotPainter extends CustomPainter{
-  @override
-  void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
-    throw UnimplementedError();
-  }
-
-
-
-  
-}
-
-
-
-
-
 
 
 Widget teaPotImage(BuildContext context)
