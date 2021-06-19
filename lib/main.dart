@@ -40,28 +40,31 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         ),
       body: Center(
-        child: teaPotButton(context),
+        child: ElevatedButton(
+          onPressed: (){print("This button works");},
+          child: Text("Test")
+        ),
       ),
     );
   }
 }
 
 
-Widget teaPotButton(BuildContext context)
-{
-  return Container(
-    child: ElevatedButton.icon(
-    icon: CustomPaint(
-      painter: CustomPainter(
+// Widget teaPotButton(BuildContext context)
+// {
+//   return Container(
+//     child: ElevatedButton.icon(
+//     icon: CustomPaint(
+//       painter: CustomPainter(
 
-      ),
-    ), 
-    label: Text("Teapot"),
-    //style: ButtonStyle(),
-    onPressed: (){ print("This button works"); }, 
-    )
-  );
-}
+//       ),
+//     ), 
+//     label: Text("Teapot"),
+//     //style: ButtonStyle(),
+//     onPressed: (){ print("This button works"); }, 
+//     )
+//   );
+// }
 
 
 Widget teaPotImage(BuildContext context)
