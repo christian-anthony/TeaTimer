@@ -38,12 +38,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: (){print("This button works");},
-          child: Text("Test")
-        ),
+      ),
+      body: SafeArea(
+        child: Container(
+          alignment: Alignment.center,
+          child: TeaTimer(),
+        )
       ),
     );
   }
