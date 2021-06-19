@@ -30,19 +30,14 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: SafeArea(
-        child: Container(
-          alignment: Alignment.center,
-          child: TeaTimer(),
-        )
+        child: TeaTimer(),
       ),
     );
   }
