@@ -18,6 +18,7 @@ class _TeaTimerState extends State<TeaTimer>{
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: null,
       alignment: Alignment.center,
       //color: Colors.red,
       child: Column(
