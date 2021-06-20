@@ -17,21 +17,26 @@ class _TeaTimerState extends State<TeaTimer>{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: null,
-      alignment: Alignment.center,
-      //color: Colors.red,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          timerText(context, _currentDuration),
-          ElevatedButton(
-            child: Text("Start"),
-            onPressed: () => onButtonPress(), 
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              teaPotImage(),
+              Column(
+                children: [
+                  //SteepText,
+                  timerText(_currentDuration),
+                ],
+              ),
+            ],
           ),
-          teaTimerSlider(context),
-        ],
-      )
+          onTap: () => onButtonPress(),
+        ),
+        teaTimerSlider(context),
+      ],
     );
   }
 
@@ -91,7 +96,7 @@ class _TeaTimerState extends State<TeaTimer>{
   }
 
   //Displays the formatted text for the timer duration
-  Widget timerText(BuildContext context, Duration timeValue){
+  Widget timerText(Duration timeValue){
     return Text(timerTextString(timeValue),
     style: TextStyle(
       fontSize: 80,
@@ -127,6 +132,13 @@ class _TeaTimerState extends State<TeaTimer>{
 
   //Called on timer completion, plays sound
   void soundAlarm(){}
+
+Widget teaPotImage()
+{
+return Image(image: AssetImage('assets/teapot1.png'),
+    height: 250,
+  );
+}
 
 } //End of TeaTimer
 

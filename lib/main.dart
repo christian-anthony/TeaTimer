@@ -62,9 +62,3 @@ class _MyHomePageState extends State<MyHomePage> {
 // }
 
 
-Widget teaPotImage(BuildContext context)
-{
-return Image(image: AssetImage('assets/teapot1.png'),
-    height: 250,
-  );
-}
