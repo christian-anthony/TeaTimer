@@ -14,6 +14,7 @@ class _TeaTimerState extends State<TeaTimer>{
   Duration _currentDuration = Duration();
   bool isRunning = false;
   double _sliderValueInSeconds = 0;
+  int steepCount = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class _TeaTimerState extends State<TeaTimer>{
               teaPotImage(),
               Column(
                 children: [
-                  //SteepText,
+                  steepText(),
                   timerText(_currentDuration),
                 ],
               ),
@@ -90,6 +91,7 @@ class _TeaTimerState extends State<TeaTimer>{
     }
     else{
       setState(() {
+        steepCount++;
         startTimer();
       });
     }
@@ -101,6 +103,15 @@ class _TeaTimerState extends State<TeaTimer>{
     style: TextStyle(
       fontSize: 80,
     ),);
+  }
+
+  Widget steepText(){
+    return Text(
+      "Steep $steepCount",
+      style: TextStyle(
+        fontSize: 30,
+      ),
+    );
   }
 
   //Outputs string from duration with 00:00 format
