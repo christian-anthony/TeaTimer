@@ -121,7 +121,13 @@ class _TeaTimerState extends State<TeaTimer>{
 
   //Outputs string from duration with 00 min 00 sec format
   String timerTextStringWritten(Duration timeValue){
-    return "${timeValue.inMinutes} min" + " " + "${timeValue.inSeconds % Duration.secondsPerMinute} sec";
+    String temp = "";
+    if (timeValue.inMinutes >= 1)
+    {
+      temp += "${timeValue.inMinutes} min ";
+    }
+    temp += "${timeValue.inSeconds % Duration.secondsPerMinute} sec";
+    return temp;
   }
 
   //Slider widget for choosing timer duration
@@ -146,7 +152,7 @@ class _TeaTimerState extends State<TeaTimer>{
 
 Widget teaPotImage()
 {
-return Image(image: AssetImage('assets/teapot1.png'),
+  return Image(image: AssetImage('assets/teapot1.png'),
     height: 250,
   );
 }
