@@ -12,7 +12,9 @@ class _TeaTimerState extends State<TeaTimer>{
   
   Timer? _timer;
   Duration _currentDuration = Duration();
+  Duration maxDuration = Duration();
   bool isRunning = false;
+  bool isComplete = false;
   double _sliderValueInSeconds = 0;
   int steepCount = 0;
 
@@ -35,6 +37,7 @@ class _TeaTimerState extends State<TeaTimer>{
             ],
           ),
           onTap: () => onButtonPress(),
+          onLongPress: () => clearTimer(),
         ),
         teaTimerSlider(context),
       ],
@@ -48,7 +51,8 @@ class _TeaTimerState extends State<TeaTimer>{
     if (_timer != null){
       _timer?.cancel();
     }
-    _currentDuration = Duration(seconds: _sliderValueInSeconds.toInt());   //This is a temp hardcoded value for testing
+    maxDuration += Duration(seconds: _sliderValueInSeconds.toInt());
+    _currentDuration = maxDuration;   //This is a temp hardcoded value for testing
     _timer = Timer.periodic(Duration(seconds: 1), (timer) { onTick(); });
     isRunning = true;
   }
@@ -58,6 +62,15 @@ class _TeaTimerState extends State<TeaTimer>{
   {
     _timer?.cancel();
     isRunning = false;
+  }
+
+  //Clears the duration values held by the timer. Currently set to clear on long press of the gesture widget
+  void clearTimer(){
+    setState(() {
+      stopTimer();
+      _currentDuration = Duration.zero;
+      maxDuration = Duration.zero;
+    });
   }
 
   //Logic for the timer to call every tick
