@@ -117,14 +117,13 @@ class _TeaTimerState extends State<TeaTimer>{
   void startTimer()
   {
 
-    //_timer = Timer.periodic(Duration(seconds: 1), (timer) { onTick(); });
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) { onTick(); });
     setState(() {
           _fullDuration += Duration(seconds: sliderValue.toInt());
     _currentDuration = _fullDuration;
-    Timer.run(() => onTick());
+    //Timer.run(() => onTick());
     _isRunning = true;
     _isComplete = false;
-    });
 
 
   }
@@ -161,6 +160,17 @@ class _TeaTimerState extends State<TeaTimer>{
   }
 
   //Logic for the timer to call every tick
+
+
+  //Decrements the time display
+  void decrementSeconds()
+  {
+    setState(() 
+    {
+      _currentDuration -= Duration(seconds: 1); 
+    });
+  }
+
   void onTick()
   {
     if (_currentDuration == Duration.zero)
@@ -173,16 +183,7 @@ class _TeaTimerState extends State<TeaTimer>{
       decrementSeconds();
     }
   }
-
-  //Decrements the time display
-  void decrementSeconds()
-  {
-    setState(() 
-    {
-      _currentDuration -= Duration(seconds: 1); 
-    });
-  }
-
+  
   //Clears any currently running timers and creates new timer
   void onClick()
   {
