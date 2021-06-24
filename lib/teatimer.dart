@@ -11,21 +11,13 @@ class TeaTimer extends StatefulWidget {
 
 class _TeaTimerState extends State<TeaTimer>{
 
-
-  
-
-
   Timer _timer = Timer.periodic(Duration(seconds: 1), (timer) {})..cancel();
-
   Duration _currentDuration = Duration();
   Duration _fullDuration = Duration();
+  double sliderValue = 0;
   bool _isRunning = false;
   bool _isComplete = false; //I promise This will get used
-  //double _sliderValueInSeconds = 0;
   int _steepCount = 0;
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,112 +28,35 @@ class _TeaTimerState extends State<TeaTimer>{
             alignment: Alignment.center,
             children: [
               teaPotImage(),
-              timerDisplay(),
+              GestureDetector( 
+                child: Column(
+                  children: [
+                    steepText(),
+                    timerText(_currentDuration),
+                  ],
+                ),
+                onTap: () => onClick(),
+                onLongPress: () => clearTimer(),
+              ),
             ],
           ),
         teaTimerSlider(context),
       ],
     );
   }
-
-  Widget timerDisplay(){
-    return 
-    GestureDetector( 
-      child: Column(
-      children: [
-        steepText(),
-        timerText(_currentDuration),
-      ],),
-      onTap: () => onClick(),
-    );
-  }
   
-
-    double sliderValue = 0;
-    //String sliderLabel= "";
-
-  //Slider widget for choosing timer duration
-  Widget teaTimerSlider(BuildContext context)
-  {
-
-    return Slider(
-      value: sliderValue, 
-      onChanged: (double value){
-        setState(() {
-          sliderValue = value;
-        });
-      },
-      min: 0,
-      max: 300,
-      label: sliderLabelText(),
-      divisions: 300,
-      );
-  }
-
-  
-  String sliderLabelText(){
-    String tempString = "";
-    if (sliderValue >= 60)
-    {
-      tempString += "${sliderValue ~/ Duration.secondsPerMinute} min ";
-    }
-    tempString += "${sliderValue % Duration.secondsPerMinute} sec";
-    return tempString;
-  }
-
-
-
-
-
-
-
-
-
-  // //Called on timer completion, plays sound
-  // void soundAlarm(){}
-
-
-
-
-
-
-  Widget teaPotImage()
-  {
-    return Image(image: AssetImage('assets/teapot1.png'),
-      height: 250,
-    );
-  }
-
-
-//Creates a new periodic timer. 
+  //Creates a new periodic timer. 
   void startTimer()
   {
-
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) { onTick(); });
     setState(() {
-          _fullDuration += Duration(seconds: sliderValue.toInt());
-    _currentDuration = _fullDuration;
-    //Timer.run(() => onTick());
-    _isRunning = true;
-    _isComplete = false;
-
-
+      _fullDuration += Duration(seconds: sliderValue.toInt());
+      _currentDuration = _fullDuration;
+      _timer = Timer.periodic(Duration(seconds: 1), (timer){  onTick(); });
+      //Timer.run(() => onTick());
+      _isRunning = true;
+      _isComplete = false;
+    });
   }
-
-
-
-
-  void setFullDuration(Duration timeValue){
-    _fullDuration = timeValue;
-  }
-
-  void addDuration(Duration timeValue){
-    _fullDuration += timeValue;
-  }
-
-
-
-
 
   //Stops the timer currently running
   void stopTimer()
@@ -159,18 +74,7 @@ class _TeaTimerState extends State<TeaTimer>{
     });
   }
 
-  //Logic for the timer to call every tick
-
-
-  //Decrements the time display
-  void decrementSeconds()
-  {
-    setState(() 
-    {
-      _currentDuration -= Duration(seconds: 1); 
-    });
-  }
-
+  //Timer calls this after each duration
   void onTick()
   {
     if (_currentDuration == Duration.zero)
@@ -180,11 +84,13 @@ class _TeaTimerState extends State<TeaTimer>{
     }
     else
     {
-      decrementSeconds();
+      setState(() {
+        _currentDuration -= Duration(seconds: 1);
+      });
     }
   }
   
-  //Clears any currently running timers and creates new timer
+  //Defines what happens when gesture detector is tapped
   void onClick()
   {
     if (_isRunning){
@@ -198,10 +104,39 @@ class _TeaTimerState extends State<TeaTimer>{
     }
   }
 
-  onComplete(){
+  //WIP is called at the end of the timer
+  void onComplete() {
     stopTimer();
     _isComplete = true;
     //soundAlarm()
+  }
+
+  //Slider widget for choosing timer duration
+  Widget teaTimerSlider(BuildContext context)
+  {
+    return Slider(
+      value: sliderValue, 
+      onChanged: (double value){
+        setState(() {
+          sliderValue = value;
+        });
+      },
+      min: 0,
+      max: 300,
+      label: sliderLabelText(),
+      divisions: 300,
+      );
+  }
+
+  //Formats the label for the slider
+  String sliderLabelText(){
+    String tempString = "";
+    if (sliderValue >= 60)
+    {
+      tempString += "${sliderValue ~/ Duration.secondsPerMinute} min ";
+    }
+    tempString += "${(sliderValue % Duration.secondsPerMinute).toInt()} sec";
+    return tempString;
   }
 
   //Displays the formatted text for the timer duration
@@ -212,6 +147,7 @@ class _TeaTimerState extends State<TeaTimer>{
     ),);
   }
 
+  //Displays the steep text above the timer
   Widget steepText(){
     return Text(
       "Steep $_steepCount",
@@ -221,13 +157,26 @@ class _TeaTimerState extends State<TeaTimer>{
     );
   }
 
-
-
-
-
-
-
+  //Returns formatted tea pot image
+  Widget teaPotImage()
+  {
+    return Image(image: AssetImage('assets/teapot1.png'),
+      height: 250,
+    );
+  }
 
 } //End of TeaTimer
 
  
+//  Commented out for future use
+
+// Decrements the time display
+// void decrementSeconds(){}
+
+// void setFullDuration(Duration timeValue){
+//   _fullDuration = timeValue;
+// }
+
+// void addDuration(Duration timeValue){
+//   _fullDuration += timeValue;
+// }
