@@ -1,18 +1,16 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-//import 'timerdisplay.dart';
+import 'package:flutter/material.dart';
+
+class TimerDisplay extends StatefulWidget {
+  TimerDisplay({ Key? key}) : super(key: key);
 
 
-//apparently my contributions dont count if they arent on the master so im adding this comment.
-class TeaTimer extends StatefulWidget {
-  @override 
-  _TeaTimerState createState() => _TeaTimerState();
+
+  @override
+  _TimerDisplayState createState() => _TimerDisplayState();
 }
 
-class _TeaTimerState extends State<TeaTimer>{
-
-
-  
+class _TimerDisplayState extends State<TimerDisplay> {
 
 
   Timer _timer = Timer.periodic(Duration(seconds: 1), (timer) {})..cancel();
@@ -25,26 +23,8 @@ class _TeaTimerState extends State<TeaTimer>{
   int _steepCount = 0;
 
 
-
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              teaPotImage(),
-              timerDisplay(),
-            ],
-          ),
-        teaTimerSlider(context),
-      ],
-    );
-  }
-
-  Widget timerDisplay(){
     return 
     GestureDetector( 
       child: Column(
@@ -55,62 +35,7 @@ class _TeaTimerState extends State<TeaTimer>{
       onTap: () => onClick(),
     );
   }
-  
 
-    double sliderValue = 0;
-    //String sliderLabel= "";
-
-  //Slider widget for choosing timer duration
-  Widget teaTimerSlider(BuildContext context)
-  {
-
-    return Slider(
-      value: sliderValue, 
-      onChanged: (double value){
-        setState(() {
-          sliderValue = value;
-        });
-      },
-      min: 0,
-      max: 300,
-      label: sliderLabelText(),
-      divisions: 300,
-      );
-  }
-
-  
-  String sliderLabelText(){
-    String tempString = "";
-    if (sliderValue >= 60)
-    {
-      tempString += "${sliderValue ~/ Duration.secondsPerMinute} min ";
-    }
-    tempString += "${sliderValue % Duration.secondsPerMinute} sec";
-    return tempString;
-  }
-
-
-
-
-
-
-
-
-
-  // //Called on timer completion, plays sound
-  // void soundAlarm(){}
-
-
-
-
-
-
-  Widget teaPotImage()
-  {
-    return Image(image: AssetImage('assets/teapot1.png'),
-      height: 250,
-    );
-  }
 
 
 //Creates a new periodic timer. 
@@ -118,14 +43,10 @@ class _TeaTimerState extends State<TeaTimer>{
   {
 
     //_timer = Timer.periodic(Duration(seconds: 1), (timer) { onTick(); });
-    setState(() {
-          _fullDuration += Duration(seconds: sliderValue.toInt());
     _currentDuration = _fullDuration;
     Timer.run(() => onTick());
     _isRunning = true;
     _isComplete = false;
-    });
-
 
   }
 
@@ -224,9 +145,4 @@ class _TeaTimerState extends State<TeaTimer>{
 
 
 
-
-
-
-} //End of TeaTimer
-
- 
+}
