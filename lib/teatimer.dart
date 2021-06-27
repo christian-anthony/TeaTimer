@@ -122,9 +122,9 @@ class _TeaTimerState extends State<TeaTimer>{
         });
       },
       min: 0,
-      max: 300,
+      max: 120,
       label: sliderLabelText(),
-      divisions: 300,
+      divisions: 120,
       );
   }
 
