@@ -12,6 +12,7 @@ class TeaTimer extends StatefulWidget {
 
 class _TeaTimerState extends State<TeaTimer>{
 
+  AudioPlayer chime = AudioPlayer()..setAsset('assets/collect-2.wav');
   Timer _timer = Timer.periodic(Duration(seconds: 1), (timer) {})..cancel();
   Duration _currentDuration = Duration();
   Duration _fullDuration = Duration();
@@ -81,7 +82,7 @@ class _TeaTimerState extends State<TeaTimer>{
     if (_currentDuration == Duration.zero)
     {
       stopTimer();
-      // soundAlarm();
+      onComplete();
     }
     else
     {
@@ -109,7 +110,7 @@ class _TeaTimerState extends State<TeaTimer>{
   void onComplete() {
     stopTimer();
     _isComplete = true;
-    //soundAlarm()
+    playSound();
   }
 
   //Slider widget for choosing timer duration
@@ -167,7 +168,7 @@ class _TeaTimerState extends State<TeaTimer>{
   }
 
   void playSound(){
-    
+    chime.play();
   }
 
 } //End of TeaTimer
