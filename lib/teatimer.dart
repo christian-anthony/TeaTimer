@@ -12,7 +12,8 @@ class TeaTimer extends StatefulWidget {
 
 class _TeaTimerState extends State<TeaTimer>{
 
-  AudioPlayer chime = AudioPlayer()..setAsset('assets/collect-2.wav');
+  AudioPlayer chime = AudioPlayer();
+  
   Timer _timer = Timer.periodic(Duration(seconds: 1), (timer) {})..cancel();
   Duration _currentDuration = Duration();
   Duration _fullDuration = Duration();
@@ -43,6 +44,7 @@ class _TeaTimerState extends State<TeaTimer>{
             ],
           ),
         teaTimerSlider(context),
+        ElevatedButton(onPressed: () => playSound(), child: Text("Play Sound")),
       ],
     );
   }
@@ -79,10 +81,10 @@ class _TeaTimerState extends State<TeaTimer>{
   //Timer calls this after each duration
   void onTick()
   {
-    if (_currentDuration == Duration.zero)
+    if (_currentDuration.inSeconds == 0)
     {
       stopTimer();
-      onComplete();
+      playSound();
     }
     else
     {
@@ -168,7 +170,10 @@ class _TeaTimerState extends State<TeaTimer>{
   }
 
   void playSound(){
+  
+    chime.setAsset('assets/collect-2.wav');
     chime.play();
+    //chime.play();
   }
 
 } //End of TeaTimer
