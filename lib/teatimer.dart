@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:just_audio/just_audio.dart';
+import 'steepcounter.dart';
 //import 'timerdisplay.dart';
 
 
@@ -22,6 +23,37 @@ class _TeaTimerState extends State<TeaTimer>{
   bool _isComplete = false; //I promise This will get used
   int _steepCount = 0;
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     children: [
+  //         Stack(
+  //           alignment: Alignment.center,
+  //           children: [
+  //             teaPotImage(),
+  //             GestureDetector( 
+  //               child: Column(
+  //                 children: [
+  //                   steepText(),
+  //                   timerText(_currentDuration),
+  //                 ],
+  //               ),
+  //               onTap: () => onClick(),
+  //               onLongPress: () => clearTimer(),
+  //             ),
+  //           ],
+  //         ),
+  //       teaTimerSlider(context),
+  //       ElevatedButton(onPressed: () => playSound(), child: Text("Play Sound")),
+  //     ],
+  //   );
+  // }
+  
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,16 +63,17 @@ class _TeaTimerState extends State<TeaTimer>{
             alignment: Alignment.center,
             children: [
               teaPotImage(),
-              GestureDetector( 
-                child: Column(
-                  children: [
-                    steepText(),
-                    timerText(_currentDuration),
-                  ],
-                ),
-                onTap: () => onClick(),
-                onLongPress: () => clearTimer(),
-              ),
+              SteepCounter(),
+              // GestureDetector( 
+              //   child: Column(
+              //     children: [
+              //       steepText(),
+              //       timerText(_currentDuration),
+              //     ],
+              //   ),
+              //   onTap: () => onClick(),
+              //   onLongPress: () => clearTimer(),
+              // ),
             ],
           ),
         teaTimerSlider(context),
@@ -48,7 +81,21 @@ class _TeaTimerState extends State<TeaTimer>{
       ],
     );
   }
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Creates a new periodic timer. 
   void startTimer()
   {
@@ -81,10 +128,18 @@ class _TeaTimerState extends State<TeaTimer>{
   //Timer calls this after each duration
   void onTick()
   {
-    if (_currentDuration.inSeconds == 0)
-    {
-      stopTimer();
+
+    //**This is a bandaid for the delay bug**
+    if (_currentDuration.inSeconds == 1)
+    { 
       playSound();
+    }
+    //************************************** */
+  
+    if (_currentDuration.inSeconds == 0)
+    { 
+      //playSound();
+      stopTimer();
     }
     else
     {
